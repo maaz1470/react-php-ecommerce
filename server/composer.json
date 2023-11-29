@@ -1,0 +1,27 @@
+{
+    "name": "rh/ecommerce",
+    "type": "project",
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Rahat Hossain",
+            "email": "rahat1470.com@gmail.com",
+            "homepage": "https://mdrahathossain.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {},
+    "keywords": [],
+    "description": "This is something project",
+    "autoload": {
+        "classmap": [],
+        "psr-4": {
+            "App\\": "app//",
+            "Package\\": "package//"
+        }
+    }
+}
