@@ -12,9 +12,9 @@
         }
     ],
     "require": {
-        "php": ">=8.0"
+        "php": ">=8.0",
+        "firebase/php-jwt": "^6.9"
     },
-    "require-dev": {},
     "keywords": [],
     "description": "This is something project",
     "autoload": {

@@ -11,6 +11,10 @@ class ComposerStaticInitf7ec977d661a142412f32e3f2a2d6fb4
         array (
             'Package\\' => 8,
         ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -21,6 +25,10 @@ class ComposerStaticInitf7ec977d661a142412f32e3f2a2d6fb4
         'Package\\' => 
         array (
             0 => __DIR__ . '/../..' . '/package',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'App\\' => 
         array (

@@ -4,30 +4,42 @@ namespace Package\Routes;
 
 class Routes
 {
+    public static function initialization(){
+        ob_start();
+        session_name('__rh');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Credintials: true');
+        header('Content-Type: application/json');
+    }
+
     public static function get($route, $path_to_include)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             self::route($route, $path_to_include);
         }
     }
+
     public static function post($route, $path_to_include)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             self::route($route, $path_to_include);
         }
     }
+
     public static function put($route, $path_to_include)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
             self::route($route, $path_to_include);
         }
     }
+
     public static function patch($route, $path_to_include)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
             self::route($route, $path_to_include);
         }
     }
+
     public static function delete($route, $path_to_include)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
@@ -82,8 +94,13 @@ class Routes
         }
         // Callback function
         if (is_callable($callback)) {
-            call_user_func_array($callback, $parameters);
-            exit();
+            if($_SERVER['REQUEST_METHOD']){
+                $callback((object)$_POST);
+                exit();
+            }else{
+                call_user_func_array($callback, $parameters);
+                exit();
+            }
         }
         include_once __DIR__ . "/$path_to_include";
         exit();
