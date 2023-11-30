@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
 import {
   CButton,
@@ -14,6 +16,8 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import axios from 'axios'
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -25,6 +29,8 @@ const Register = () => {
     password: '',
     repeatPassword: ''
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setUser({
@@ -39,14 +45,24 @@ const Register = () => {
     e.preventDefault();
 
     if(user.password != user.repeatPassword){
-      return console.log('password not matched')
+      return Swal.fire('Error','Password not matched','error')
     }else{
       const form = new FormData();
       for(const i in user){
         form.append(i,user[i])
       }
       axios.post('/auth/register-user',form)
-      .then(response => console.log(response))
+      .then(response => {
+        if(response.data.status === 401){
+          Swal.fire('Error',response.data.message,'error')
+        }else if(response.data.status === 200){
+          Swal.fire('Success',response.data.message,'success')
+          navigate('/auth/login')
+        }else{
+          Swal.fire('Error','Something went wrong. Please try again.','error')
+        }
+        // console.log(response)
+      })
       .catch(error => console.log(error))
     }
 

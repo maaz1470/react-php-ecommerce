@@ -12,3 +12,7 @@ use App\Http\Controller\AuthController;
     Route::post('/auth/register-user',function($data){
         AuthController::class::userRegister($data);
     });
+
+    Route::post('/auth/user-login',function($data){
+        AuthController::class::userLogin($data);
+    });
