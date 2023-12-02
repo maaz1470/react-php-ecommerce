@@ -15,7 +15,6 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:8000'
 
-axios.get('/').then(response => console.log(response))
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>

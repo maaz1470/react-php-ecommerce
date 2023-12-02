@@ -4,6 +4,7 @@
 
     use App\App;
 use App\Http\Controller\AuthController;
+
     Route::initialization();
     Route::get('/',function(){
         App::class::home();

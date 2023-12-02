@@ -5,8 +5,9 @@
 use App\DB\DB;
 use Exception;
 use PDO;
+use App\Http\Controller\Controller;
 
-class AuthController{
+class AuthController extends Controller{
     private static $tableName = 'auth';
     private static $table;
 
@@ -104,7 +105,13 @@ class AuthController{
     }
 
     public static function userLogin($request){
+        AuthController::todudu();
+        exit();
         echo json_encode($request);
+    }
+
+    public static function partho(){
+        echo 'Hello partho';
     }
     
 }
