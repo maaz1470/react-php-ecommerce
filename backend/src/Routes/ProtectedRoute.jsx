@@ -4,14 +4,21 @@
 import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from 'src/Provider/AuthProvider';
+import Loading from 'src/hook/useLoading';
+// import loading from 'src/hook/useLoading';
 
 const ProtectedRoute = ({children}) => {
-    const {auth} = useContext(AuthContext)
-    if(auth){
-        return children;
+    const {auth, loading:serverLoading} = useContext(AuthContext)
+    if(serverLoading){
+        return <Loading />;
     }else{
-        return <Navigate to={'/auth/login'} replace />
+        if(auth){
+            return children;
+        }else{
+            return <Navigate to={'/auth/login'} replace />
+        }
     }
+    
 };
 
 export default ProtectedRoute;

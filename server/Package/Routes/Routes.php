@@ -2,14 +2,18 @@
 
 namespace Package\Routes;
 
+use App\Config;
+
 class Routes
 {
     public static function initialization(){
         ob_start();
         session_name('__rh');
-        header('Access-Control-Allow-Origin: *');
+        $url = Config::$front_url;
+        header("Access-Control-Allow-Origin: $url");
         header('Access-Control-Allow-Credintials: true');
         header('Content-Type: application/json');
+        header('Access-Control-Allow-Headers: *');
     }
 
     public static function get($route, $path_to_include)

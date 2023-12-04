@@ -1,12 +1,15 @@
 <?php 
     namespace App\Http\Controller;
 
-class Controller{
-    private static function hello(){
-        echo "Hello World";
-    }
+use App\Config;
+use Exception;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use UnexpectedValueException;
 
-    public static function todudu(){
-        self::hello();
+class Controller{
+    public function __construct()
+    {
+        
     }
 }

@@ -15,6 +15,12 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:8000'
 
+axios.interceptors.request.use(config => {
+  const token = localStorage.getItem('__rh_token')
+  config.headers.Authorization = token ? `Bearer ${token}` : '';
+  return config;
+})
+
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>

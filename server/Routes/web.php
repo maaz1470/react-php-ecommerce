@@ -4,6 +4,7 @@
 
     use App\App;
 use App\Http\Controller\AuthController;
+use App\Http\Controller\CategoryController;
 
     Route::initialization();
     Route::get('/',function(){
@@ -16,4 +17,12 @@ use App\Http\Controller\AuthController;
 
     Route::post('/auth/user-login',function($data){
         AuthController::class::userLogin($data);
+    });
+
+    Route::get('/authCheck',function(){
+        AuthController::class::checkUser();
+    });
+
+    Route::post('/category/add',function($data){
+        CategoryController::class::addCategory($data);
     });

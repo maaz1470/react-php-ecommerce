@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -17,10 +17,14 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import axios from 'axios'
+import Swal from 'sweetalert2'
+import { AuthContext } from 'src/Provider/AuthProvider'
 
 
 
 const Login = () => {
+
+  const {getAuth} = useContext(AuthContext)
 
   const [user, setUser] = useState({
     username: '',
@@ -33,6 +37,7 @@ const Login = () => {
       [e.target.name]: e.target.value
     })
   }
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -41,8 +46,26 @@ const Login = () => {
       form.append(i, user[i])
     }
     axios.post('/auth/user-login', form)
-      .then(response => console.log(response))
-      .catch(error => console.log(error))
+      .then(response => {
+        if(response.data.status === 200){
+          Swal.fire('Success',response.data.message,'success')
+          localStorage.setItem('__rh_token',response.data.token)
+          navigate('/',{
+            replace: true
+          })
+          getAuth();
+          
+        }else if(response.data.status === 401){
+          Swal.fire('Error',response.data.message,'error')
+        }else{
+          console.log(response)
+          Swal.fire('Error','Something went wrong. Please try again or contact your developer.','error')
+
+        }
+      })
+      .catch(error => {
+        Swal.fire('Error','Error','error')
+      })
   }
 
 

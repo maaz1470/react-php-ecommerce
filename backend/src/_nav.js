@@ -27,8 +27,10 @@ const _nav = [
     },
   },
   {
-    component: CNavTitle,
-    name: 'Theme',
+    component: CNavItem,
+    name: 'Category',
+    to: '/categories',
+    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
